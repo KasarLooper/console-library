@@ -7,7 +7,7 @@ public class Library {
         return new ArrayList<Book>();
     }
 
-    public ArrayList<Book> searchBooks() {
+    public ArrayList<Book> searchBooks(String prompt) {
         return new ArrayList<>();
     }
 
