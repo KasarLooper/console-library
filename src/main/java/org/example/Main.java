@@ -8,12 +8,14 @@ public class Main {
 
     String author;
     String name;
+    boolean play;
 
     public Main() {
         library = new Library();
         Scanner input = new Scanner(System.in);
+        play = true;
 
-        while (true) {
+        while (play) {
             System.out.println(
                     """
                     Выберите действие:
@@ -35,6 +37,7 @@ public class Main {
                         System.out.println(book);
 
                     }
+                    break;
                 case ("2"):
                     System.out.println("Какую книгугу вы хотите взять?");
                     System.out.print("Автор: ");
@@ -45,8 +48,9 @@ public class Main {
                         library.borrowBook(name, author);
                         System.out.println("Книга успешно взята.\n Спасибо что ходите к нам в библиотеку");
                     } else {
-                        System.out.println("К сожелению такая книга не найдена\uD83D\uDE1E"); // 😞
+                        System.out.println("К сожелению такая книга не найдена😞");
                     }
+                    break;
 
 
                 case ("3"):
@@ -61,6 +65,7 @@ public class Main {
                     } else {
                         System.out.println("Извините, но такой книги мы вам не давали");
                     }
+                    break;
                 case ("4"):
                     System.out.println("Какую книгу вы хотите пожертвовать библиотеке?");
                     System.out.print("Автор: ");
@@ -77,10 +82,12 @@ public class Main {
                     } else {
                         System.out.println("Такой книги/автора не обнаружено");
                     }
+                    break;
 
 
                 case ("6"):
                     System.out.println("До свидания");
+                    play = false;
                     break;
             }
 
