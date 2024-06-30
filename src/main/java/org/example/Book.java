@@ -1,13 +1,20 @@
 package org.example;
 
-public class Book {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Book implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     boolean isThere;
     String name;
     String authorName;
 
-    Book(String name, String autorName){
+    Book(String name, String authorName){
         this.name = name;
-        this.authorName = autorName;
+        this.authorName = authorName;
     }
     String getName(){
         return name;

@@ -1,10 +1,18 @@
 package org.example;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Library {
+public class Library implements Serializable {
     private ArrayList<Book> books = new ArrayList<>();
+
+    public Library() {
+    }
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     public ArrayList<Book> getBooks() {
         return books;
@@ -33,26 +41,26 @@ public class Library {
         for (Book book : books) {
             if (book.getName().equals(name) && book.getAuthorName().equals(author)) {
                 if (!book.getIsThere()) {
-                book.setBorrowBook(true);
-                //System.out.println("Книга " + name + " автора " + author + " успешно выдана.");
-            } else {
-                //System.out.println("Книга " + name + " автора " + author + " занята.");
+                    book.setBorrowBook(true);
+                    //System.out.println("Книга " + name + " автора " + author + " успешно выдана.");
+                } else {
+                    //System.out.println("Книга " + name + " автора " + author + " занята.");
+                }
+                return;
             }
-            return;
         }
-    }
         System.out.println("Книги " + name + " автора " + author + " нет в библиотеке.");
     }
 
     public void returnBook(String name, String author) {
         for (Book book : books) {
-        if (book.getName().equals(name) && book.getAuthorName().equals(author)) {
-            if (book.getIsThere()) {
-                book.setBorrowBook(false);
-                //System.out.println("Книга " + name + " автора " + author + " возвращена.");
+            if (book.getName().equals(name) && book.getAuthorName().equals(author)) {
+                if (book.getIsThere()) {
+                    book.setBorrowBook(false);
+                    //System.out.println("Книга " + name + " автора " + author + " возвращена.");
+                }
+                return;
             }
-            return;
-        }
         }
         //System.out.println("Книги " + name + " автора " + author + " нет в библиотеке.");
     }
