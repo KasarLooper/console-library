@@ -53,6 +53,7 @@ public class Main {
                     System.out.println("Вот список книг, которые есть в нашей библиотеке");
                     for (Book book : library.getBooks()) {
                         System.out.println(book);
+                        if (book.getIsThere()) System.out.println(book);
                     }
                     break;
                 case ("2"):
@@ -99,7 +100,7 @@ public class Main {
                     if (!search.isEmpty()) {
                         System.out.println("Вот список книг автора " + answer2);
                         for (Book book : search)
-                            System.out.println(book);
+                            if (book.getIsThere()) System.out.println(book);
                     } else {
                         System.out.println("Такого автора не обнаружено");
                     }
