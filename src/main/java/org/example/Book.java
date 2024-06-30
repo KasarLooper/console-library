@@ -1,9 +1,9 @@
 package org.example;
 
 public class Book {
-    boolean isThere;
-    String name;
-    String authorName;
+    private boolean isThere;
+    private String name;
+    private String authorName;
 
     Book(String name, String autorName){
         this.name = name;
