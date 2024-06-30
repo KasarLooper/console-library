@@ -2,37 +2,57 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    static Library library;
     static String author;
     static String name;
     static boolean play;
 
-    public static void main(String[] args) {
-        library = new Library();
+
+    final static String path = "D:\\library.ser";
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner input = new Scanner(System.in);
         play = true;
+
+        FileInputStream fileInputStream = new FileInputStream(path);
+
+        Library library = new Library();
+        try {
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            library = (Library) objectInputStream.readObject();
+            objectInputStream.close();
+        } catch (EOFException e) {
+            FileOutputStream outputStream = new FileOutputStream(path);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+
+            objectOutputStream.writeObject(new Library());
+            objectOutputStream.close();
+        }
+
+
 
         while (play) {
             System.out.print(
                     """
-                    
-                    Выберите действие:
-                    1. Посмотреть книги
-                    2. Взять книгу
-                    3. Вернуть книгу
-                    4. Пожертвовать библиотеке книгу
-                    5. Найти все книги конкретного автора 
-                    6. Выйти
-                    Введите цифру действия, которое выбрали:
-                    """
+                                                
+                            Выберите действие:
+                            1. Посмотреть книги
+                            2. Взять книгу
+                            3. Вернуть книгу
+                            4. Пожертвовать библиотеке книгу
+                            5. Найти все книги конкретного автора 
+                            6. Выйти
+                            Введите цифру действия, которое выбрали:
+                            """
             );
             String answer = input.nextLine();
             switch (answer) {
                 case ("1"):
                     System.out.println("Вот список книг, которые есть в нашей библиотеке");
                     for (Book book : library.getBooks()) {
+                        System.out.println(book);
                         if (book.getIsThere()) System.out.println(book);
                     }
                     break;
@@ -90,6 +110,12 @@ public class Main {
                 case ("6"):
                     System.out.println("До свидания");
                     play = false;
+
+                    FileOutputStream outputStream = new FileOutputStream(path);
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+
+                    objectOutputStream.writeObject(library);
+                    objectOutputStream.close();
                     break;
             }
         }
